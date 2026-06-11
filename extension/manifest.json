@@ -3,7 +3,7 @@
   "name": "KindleFeeder",
   "version": "1.0",
   "description": "Send any article to your Kindle over USB.",
-  "permissions": ["activeTab", "scripting", "nativeMessaging", "alarms", "notifications"],
+  "permissions": ["activeTab", "scripting", "nativeMessaging", "alarms", "notifications", "storage"],
   "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "popup.html",
