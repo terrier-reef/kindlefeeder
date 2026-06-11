@@ -4,6 +4,7 @@
   "version": "1.0",
   "description": "Send any article to your Kindle over USB.",
   "permissions": ["activeTab", "scripting", "nativeMessaging", "alarms", "notifications"],
+  "host_permissions": ["<all_urls>"],
   "action": {
     "default_popup": "popup.html",
     "default_title": "Send to Kindle"
