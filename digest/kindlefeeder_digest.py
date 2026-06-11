@@ -262,6 +262,10 @@ def run(api_key=None, progress_cb=None):
     Main digest run. progress_cb(msg) is called with status strings
     if provided (used by the tray UI to stream progress).
     """
+    # Force UTF-8 output so arrow characters don't crash on Windows cp1252
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
     def progress(msg):
         log.info(msg)
         print(msg, flush=True)
@@ -288,14 +292,14 @@ def run(api_key=None, progress_cb=None):
         fetched = fetch_article(cand['url'], rss_summary=cand['summary'])
         text = fetched['text']
         if not text.strip():
-            progress(f'  → skipped (no content)')
+            progress(f'  -> skipped (no content)')
             continue
         try:
             synthesized = synthesize(cand['title'], text, api_key)
             articles.append({**cand, 'synthesized': synthesized})
-            progress(f'  → synthesized ({len(synthesized)} chars)')
+            progress(f'  -> synthesized ({len(synthesized)} chars)')
         except Exception as e:
-            progress(f'  → synthesis failed: {e}')
+            progress(f'  -> synthesis failed: {e}')
 
     if not articles:
         progress('ERROR: No articles — aborting.')
