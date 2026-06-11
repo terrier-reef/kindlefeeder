@@ -1,4 +1,7 @@
-# No extra Python packages needed — kindlefeeder_host.py uses only stdlib.
-# Runtime dependencies:
-#   - Python 3.8+ (https://www.python.org/downloads/)
-#   - Calibre (https://calibre-ebook.com/download_windows)
+# Runtime dependencies for the tray app
+pystray>=0.19
+Pillow>=10.0
+
+# System dependencies (installed separately):
+#   - Python 3.8+   https://www.python.org/downloads/
+#   - Calibre       https://calibre-ebook.com/download_windows
