@@ -1,0 +1,9 @@
+{
+  "name": "com.kindlefeeder.host",
+  "description": "KindleFeeder native messaging host",
+  "path": "C:\\KindleFeeder\\host\\kindlefeeder_host.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://REPLACE_WITH_YOUR_EXTENSION_ID/"
+  ]
+}

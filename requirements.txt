@@ -1,0 +1,4 @@
+# No extra Python packages needed — kindlefeeder_host.py uses only stdlib.
+# Runtime dependencies:
+#   - Python 3.8+ (https://www.python.org/downloads/)
+#   - Calibre (https://calibre-ebook.com/download_windows)
