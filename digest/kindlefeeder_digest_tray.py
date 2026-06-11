@@ -221,6 +221,9 @@ def open_settings(icon):
     btn_frame.grid(row=8, column=0, columnspan=3, pady=10)
 
     def on_run_now():
+        log_box.config(state='normal')
+        log_box.delete('1.0', 'end')
+        log_box.config(state='disabled')
         run_digest(icon, output_widget=log_box)
 
     def on_save():
@@ -245,8 +248,32 @@ def open_settings(icon):
 
 # ── Tray menu ─────────────────────────────────────────────────────────────────
 
+def open_progress_window(icon):
+    """Standalone progress window shown when Run Now is clicked from the tray menu."""
+    win = tk.Tk()
+    win.title('KindleFeeder Digest — Running')
+    win.configure(bg='#1a1a2e')
+    win.resizable(True, True)
+
+    tk.Label(win, text='Running digest…', bg='#1a1a2e', fg='#e0e0e0',
+             font=('Segoe UI', 10)).pack(padx=12, pady=(12, 4), anchor='w')
+
+    log_box = scrolledtext.ScrolledText(
+        win, width=60, height=18,
+        bg='#0a0a1a', fg='#74c69d',
+        state='disabled', font=('Consolas', 9),
+    )
+    log_box.pack(padx=12, pady=4, fill='both', expand=True)
+
+    tk.Button(win, text='Close', bg='#16213e', fg='#e0e0e0', relief='flat',
+              padx=12, pady=4, command=win.destroy).pack(pady=8)
+
+    run_digest(icon, output_widget=log_box)
+    win.mainloop()
+
+
 def on_run_now(icon, item):
-    run_digest(icon)
+    threading.Thread(target=open_progress_window, args=(icon,), daemon=True).start()
 
 
 def on_settings(icon, item):
